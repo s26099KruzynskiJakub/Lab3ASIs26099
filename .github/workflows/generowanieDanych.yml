@@ -1,0 +1,33 @@
+name: UploadingLearningDataToGoogleSheet
+
+on:
+  workflow_dispatch:
+
+jobs:
+  get_data:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade google-api-python-client google-auth google-auth-httplib2 google-auth-oauthlib pandas scikit-learn gspread requests oauth2client faker
+
+      - name: Clone the other repo (Lab2---Obr-bka-danych)
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}  # Wymaga GitHub Personal Access Token w secrets
+        run: |
+          git clone https://$GH_PAT@github.com/PJATK-ASI-2024/Lab2---Obr-bka-danych.git
+          cd Lab2---Obr-bka-danych
+
+      - name: Generate data using generator_danych.py
+        run: |
+          python3 Lab2---Obr-bka-danych/generator_danych.py -s 26099
+
+      - name: Wygenerowanie danych i aktualizacja Google Sheets
+        env:
+          GOOGLE_SHEETS_CREDENTIALS: ${{ secrets.GOOGLE_SHEETS_CREDENTIALS }}
+        run: |
+          python3 aktualizowanieGooglesheets.py

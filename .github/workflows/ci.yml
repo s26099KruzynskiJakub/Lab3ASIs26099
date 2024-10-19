@@ -21,4 +21,4 @@ jobs:
 
       - name: Run Python script in Lab3ASIs26099/asi3Project
         run: |
-          python Lab3ASIs26099/asi3Project/main.py
+          python asi3Project/main.py

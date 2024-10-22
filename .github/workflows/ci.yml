@@ -32,6 +32,10 @@ jobs:
         run: |
           python asi3Project/trening_i_raport.py
 
+      - name: List files in asi3Project
+        run: |
+          ls -la asi3Project  # This will help verify if .docx files are present
+
       - name: Archive Word Reports as Artifacts
         uses: actions/upload-artifact@v3
         with:

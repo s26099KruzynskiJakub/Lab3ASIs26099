@@ -98,3 +98,5 @@ else:
 # Zapisanie dokumentu
 doc.save('optymalizacja_modelu.docx')
 print("Files in the current directory:", os.listdir('.'))
+current_directory = os.getcwd()
+print(f"Aktualna ścieżka robocza: {current_directory}")

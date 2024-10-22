@@ -1,24 +1,40 @@
-name: Pobierz dane z Google Sheets
+name: Run Python Scripts and Save Artifacts
 
 on:
   push:
     branches:
       - main
+  workflow_dispatch:  # Allows manual triggering of the workflow
 
 jobs:
-  get_data:
+  run_scripts:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repo
+      - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Clone Lab3-Analizator_wynikow repo
-        env:
-          ac: ${{ secrets.ACCESSTOKEN }}  # GitHub PAT stored in secrets
-        run: |
-          git clone https://$ac@github.com/PJATK-ASI-2024/Lab3-Analizator_wynikow.git
-          cd Lab3-Analizator_wynikow
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
 
-      - name: Run Python script in Lab3ASIs26099/asi3Project
+      - name: Install Dependencies
         run: |
-          python asi3Project/main.py
+         python -m pip install --upgrade pip
+          pip install joblib pandas numpy matplotlib seaborn scikit-learn python-docx
+
+      - name: Run czyszczenie_porównywanieModeli.py
+        run: |
+          python czyszczenie_porównywanieModeli.py
+
+      - name: Run trening_i_raport.py
+        run: |
+          python trening_i_raport.py
+
+      - name: Archive Word Reports as Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: Word-Reports
+          path: |
+            *.docx  # Upload all Word documents as artifacts

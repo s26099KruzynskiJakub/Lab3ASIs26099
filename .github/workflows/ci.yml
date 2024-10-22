@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch:  # Allows manual triggering of the workflow
+  workflow_dispatch:  
 
 jobs:
   run_scripts:
@@ -26,11 +26,11 @@ jobs:
 
       - name: Run czyszczenie_porównywanieModeli.py
         run: |
-          python czyszczenie_porównywanieModeli.py
+          python asi3Project/czyszczenie_porównywanieModeli.py
 
       - name: Run trening_i_raport.py
         run: |
-          python trening_i_raport.py
+          python asi3Project/trening_i_raport.py
 
       - name: Archive Word Reports as Artifacts
         uses: actions/upload-artifact@v3

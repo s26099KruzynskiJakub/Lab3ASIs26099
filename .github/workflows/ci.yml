@@ -40,5 +40,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: Word-Reports
-          path: |
-            *.docx  # Upload all Word documents as artifacts
+          path: asi3Project/*.docx

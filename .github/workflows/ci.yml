@@ -40,4 +40,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: Word-Reports
-          path: asi3Project/*.docx
+          path: asi3Project/analiza_statystyczna.docx

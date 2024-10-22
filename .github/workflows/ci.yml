@@ -37,7 +37,7 @@ jobs:
           ls -la asi3Project  # This will help verify if .docx files are present
 
       - name: Upload .docx artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: docx-files
           path: /home/runner/work/Lab3ASIs26099/Lab3ASIs26099/*.docx

@@ -37,4 +37,4 @@ jobs:
         with:
           name: Word-Reports
           path: |
-            asi3Project/*.docx  # Upload all Word documents as artifacts
+            *.docx  # Upload all Word documents as artifacts

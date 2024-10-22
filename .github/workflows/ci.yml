@@ -3,7 +3,7 @@ name: Pobierz dane z Google Sheets
 on:
   push:
     branches:
-      - Lab2---Obr-bka-danych
+      - main
 
 jobs:
   get_data:
@@ -12,45 +12,13 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
 
-      - name: Install dependencies
-        run: |
-          pip install --upgrade google-api-python-client google-auth google-auth-httplib2 google-auth-oauthlib pandas scikit-learn gspread requests oauth2client faker
-          
-      - name: Pobierz dane z Google Sheets
+      - name: Clone Lab3-Analizator_wynikow repo
         env:
-          GOOGLE_SHEETS_CREDENTIALS: ${{ secrets.GOOGLE_SHEETS_CREDENTIALS }}
+          ac: ${{ secrets.ACCESSTOKEN }}  # GitHub PAT stored in secrets
         run: |
-          python3 pobierz_dane.py
+          git clone https://$ac@github.com/PJATK-ASI-2024/Lab3-Analizator_wynikow.git
+          cd Lab3-Analizator_wynikow
 
-      - name: Oczyszczenie danych
-        env:  
-          GOOGLE_SHEETS_CREDENTIALS: ${{ secrets.GOOGLE_SHEETS_CREDENTIALS }}
+      - name: Run Python script in Lab3ASIs26099/asi3Project
         run: |
-          python3 czysc_dane.py
-
-      - name: Upload log.txt as an artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: log-file
-          path: log.txt
-
-      - name: Upload report.txt as an artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: report-file
-          path: report.txt
-
-  display_report:
-    needs: get_data
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v2
-
-      - name: Download report artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: report-file
-
-      - name: Display report content
-        run: cat report.txt
+          python asi3Project/main.py

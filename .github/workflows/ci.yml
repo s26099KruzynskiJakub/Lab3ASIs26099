@@ -36,8 +36,8 @@ jobs:
         run: |
           ls -la asi3Project  # This will help verify if .docx files are present
 
-      - name: Archive Word Reports as Artifacts
-        uses: actions/upload-artifact@v3
+      - name: Upload .docx artifacts
+        uses: actions/upload-artifact@v2
         with:
-          name: Word-Reports
-          path: asi3Project/analiza_statystyczna.docx
+          name: docx-files
+          path: /home/runner/work/Lab3ASIs26099/Lab3ASIs26099/*.docx

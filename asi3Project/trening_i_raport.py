@@ -1,3 +1,5 @@
+import os
+
 import joblib
 import pandas as pd
 import numpy as np
@@ -95,3 +97,4 @@ else:
 
 # Zapisanie dokumentu
 doc.save('optymalizacja_modelu.docx')
+print("Files in the current directory:", os.listdir('.'))

@@ -15,6 +15,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.svm import SVR
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.preprocessing import LabelEncoder
+import aspose.words as aw
 
 # Wczytanie danych
 url = 'https://vincentarelbundock.github.io/Rdatasets/csv/AER/CollegeDistance.csv'

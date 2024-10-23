@@ -22,6 +22,7 @@ url = 'https://vincentarelbundock.github.io/Rdatasets/csv/AER/CollegeDistance.cs
 data = pd.read_csv(url)
 nazwaWord='analiza_statystyczna.docx'
 nazwaPDF='analiza_statystyczna.pdf'
+nazwaWordNoExt='analiza_statystyczna'
 
 
 # Oczyszczanie starych plikow z zeszłych uruchomien jesli takie były
@@ -177,8 +178,5 @@ doc.add_paragraph(f'W niniejszej pracy wykonano pełną analizę danych, w tym i
                   f'Zastosowano kilka modeli predykcyjnych, spośród których najlepszy okazał się model "{best_model_name}" z najniższym błędem średniokwadratowym (MSE): {best_mse:.4f}. '
                   'Dokument ten zawiera zarówno szczegóły dotyczące poszczególnych zmiennych, jak i oceny porównywanych modeli. '
                   'W razie potrzeby można przeprowadzić dodatkową optymalizację, aby jeszcze bardziej poprawić jakość modelu.')
-doc.save(nazwaWord)
-print(f'Dokument zapisany jako {nazwaWord}.')
-doc_pdf = aw.Document(nazwaWord)
-doc_pdf.save('analiza_statystyczna.pdf')
-print('zapsano pdf')
+doc.save(nazwaWordNoExt + 'docx')
+doc.save(nazwaWordNoExt + 'pdf')

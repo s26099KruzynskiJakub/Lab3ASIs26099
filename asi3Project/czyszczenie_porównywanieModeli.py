@@ -178,5 +178,5 @@ doc.save(nazwaWord + ".docx")
 saveOptions = aw.saving.PdfSaveOptions()
 saveOptions.compliance = aw.saving.PdfCompliance.PDF17 
 # Zapis dokumentu w formacie PDF (.pdf)
-doc.save(nazwaWord, saveOptions)
+doc.save("analiza.pdf", saveOptions)
 

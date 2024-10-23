@@ -21,11 +21,15 @@ import aspose.words as aw
 url = 'https://vincentarelbundock.github.io/Rdatasets/csv/AER/CollegeDistance.csv'
 data = pd.read_csv(url)
 nazwaWord='analiza_statystyczna.docx'
-nazwaPDF=nazwaWord
+nazwaPDF='analiza_statystyczna.pdf'
+
 
 # Oczyszczanie starych plikow z zeszłych uruchomien jesli takie były
 if os.path.exists(nazwaWord):
     os.remove(nazwaWord)
+# Oczyszczanie starych plikow z zeszłych uruchomien jesli takie były
+if os.path.exists(nazwaPDF):
+    os.remove(nazwaPDF)
 
 # Utworzenie dokumentu Word
 doc = Document()

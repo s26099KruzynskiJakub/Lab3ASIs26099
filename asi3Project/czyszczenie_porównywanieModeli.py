@@ -30,7 +30,7 @@ pdf.add_page()
 
 # Dodanie nagłówka
 pdf.set_font("Arial", 'B', 16)
-pdf.cell(0, 10, 'Analiza statystyczna zmiennych', ln=True, align='C')
+pdf.cell(0, 10, 'Analiza statystyczna zmiennych'.encode('latin-1', 'replace').decode('latin-1'), ln=True, align='C')
 pdf.ln(10)
 
 # Wstęp
@@ -42,20 +42,20 @@ pdf.multi_cell(0, 10, 'Niniejszy dokument przedstawia wyniki analizy statystyczn
 
 pdf.ln(10)
 pdf.set_font("Arial", 'B', 14)
-pdf.cell(0, 10, 'Informacje o zmiennych', ln=True)
+pdf.cell(0, 10, 'Informacje o zmiennych'.encode('latin-1', 'replace').decode('latin-1'), ln=True)
 pdf.set_font("Arial", size=12)
 
 # Funkcja tworząca wykresy i statystyki dla każdej zmiennej
 def analyze_column(column_name):
     pdf.set_font("Arial", 'B', 12)
-    pdf.cell(0, 10, f'Zmienna: {column_name}', ln=True)
+    pdf.cell(0, 10, f'Zmienna: {column_name}'.encode('latin-1', 'replace').decode('latin-1'), ln=True)
     
     pdf.set_font("Arial", size=12)
-    pdf.cell(0, 10, f'Typ zmiennej: {data[column_name].dtype}', ln=True)
+    pdf.cell(0, 10, f'Typ zmiennej: {data[column_name].dtype}'.encode('latin-1', 'replace').decode('latin-1'), ln=True)
 
     # Statystyki opisowe
     desc_stats = data[column_name].describe()
-    pdf.multi_cell(0, 10, f'Statystyki opisowe:\n{desc_stats.to_string()}')
+    pdf.multi_cell(0, 10, f'Statystyki opisowe:\n{desc_stats.to_string()}'.encode('latin-1', 'replace').decode('latin-1'))
 
     # Tworzenie wykresu histogramu dla zmiennej
     plt.figure(figsize=(10, 6))
@@ -101,9 +101,9 @@ data['region'] = data['region'].map({'other': 1, 'west': 0})
 initial_shape = data.shape
 data.dropna(thresh=len(data.columns) - 3, inplace=True)
 pdf.add_page()
-pdf.cell(0, 10, 'Obsługa brakujących wartości', ln=True)
-pdf.cell(0, 10, f'Kształt danych przed usunięciem wierszy: {initial_shape}', ln=True)
-pdf.cell(0, 10, f'Kształt danych po usunięciu wierszy: {data.shape}', ln=True)
+pdf.cell(0, 10, 'Obsługa brakujących wartości'.encode('latin-1', 'replace').decode('latin-1'), ln=True)
+pdf.cell(0, 10, f'Kształt danych przed usunięciem wierszy: {initial_shape}'.encode('latin-1', 'replace').decode('latin-1'), ln=True)
+pdf.cell(0, 10, f'Kształt danych po usunięciu wierszy: {data.shape}'.encode('latin-1', 'replace').decode('latin-1'), ln=True)
 
 # Uzupełnienie brakujących wartości medianą dla kolumn numerycznych
 numerical_cols = data.select_dtypes(include=['float64', 'int64']).columns.tolist()
@@ -117,7 +117,7 @@ data.to_csv('cleaned_data.csv', index=False)
 # Etap porównania modeli
 pdf.add_page()
 pdf.set_font("Arial", 'B', 14)
-pdf.cell(0, 10, 'Porównanie modeli', ln=True)
+pdf.cell(0, 10, 'Porównanie modeli'.encode('latin-1', 'replace').decode('latin-1'), ln=True)
 pdf.set_font("Arial", size=12)
 
 # Wybór zmiennych do modelowania
@@ -144,7 +144,7 @@ for model_name, model in models.items():
     model.fit(X_train, y_train)
     y_pred = model.predict(X_test)
     mse = mean_squared_error(y_test, y_pred)
-    pdf.cell(0, 10, f'Model: {model_name}, Mean Squared Error (MSE): {mse:.4f}', ln=True)
+    pdf.cell(0, 10, f'Model: {model_name}, Mean Squared Error (MSE): {mse:.4f}'.encode('latin-1', 'replace').decode('latin-1'), ln=True)
 
     if mse < best_mse:
         best_mse = mse
@@ -153,17 +153,17 @@ for model_name, model in models.items():
 
 # Zapisanie najlepszego modelu
 joblib.dump(best_model, 'best_model.pkl')
-pdf.cell(0, 10, f'Najlepszy model: {best_model_name} z MSE: {best_mse:.4f}', ln=True)
+pdf.cell(0, 10, f'Najlepszy model: {best_model_name} z MSE: {best_mse:.4f}'.encode('latin-1', 'replace').decode('latin-1'), ln=True)
 
 # Podsumowanie
 pdf.add_page()
 pdf.set_font("Arial", 'B', 14)
-pdf.cell(0, 10, 'Podsumowanie', ln=True)
+pdf.cell(0, 10, 'Podsumowanie'.encode('latin-1', 'replace').decode('latin-1'), ln=True)
 pdf.set_font("Arial", size=12)
 pdf.multi_cell(0, 10, f'W niniejszej pracy wykonano pełną analizę danych, w tym ich oczyszczenie i przygotowanie do modelowania. '
                       f'Zastosowano kilka modeli predykcyjnych, spośród których najlepszy okazał się model "{best_model_name}" z najniższym błędem średniokwadratowym (MSE): {best_mse:.4f}. '
                       'Dokument ten zawiera zarówno szczegóły dotyczące poszczególnych zmiennych, jak i oceny porównywanych modeli. '
-                      'W razie potrzeby można przeprowadzić dodatkową optymalizację, aby jeszcze bardziej poprawić jakość modelu.')
+                      'W razie potrzeby można przeprowadzić dodatkową optymalizację, aby jeszcze bardziej poprawić jakość modelu.'.encode('latin-1', 'replace').decode('latin-1'))
 
 # Zapisanie PDF
 pdf.output(nazwaPDF)

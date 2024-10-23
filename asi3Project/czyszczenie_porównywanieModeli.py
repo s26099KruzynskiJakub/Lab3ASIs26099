@@ -173,12 +173,3 @@ doc.add_paragraph(f'W niniejszej pracy wykonano pełną analizę danych, w tym i
                   'W razie potrzeby można przeprowadzić dodatkową optymalizację, aby jeszcze bardziej poprawić jakość modelu.')
 
 doc.save(nazwaWord)
-# Funkcja konwertująca plik Word na PDF
-def convert_word_to_pdf(word_file, pdf_file):
-    pdfkit.from_file(word_file, pdf_file)
-
-# Konwersja dokumentu Word na PDF
-nazwaPdf = nazwaWord
-convert_word_to_pdf(nazwaWord, nazwaPdf)
-
-print(f'Dokument zapisany jako PDF: {nazwaPdf}')

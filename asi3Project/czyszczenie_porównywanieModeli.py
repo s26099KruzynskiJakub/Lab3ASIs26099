@@ -179,4 +179,4 @@ doc.add_paragraph(f'W niniejszej pracy wykonano pełną analizę danych, w tym i
                   'Dokument ten zawiera zarówno szczegóły dotyczące poszczególnych zmiennych, jak i oceny porównywanych modeli. '
                   'W razie potrzeby można przeprowadzić dodatkową optymalizację, aby jeszcze bardziej poprawić jakość modelu.')
 doc.save(nazwaWordNoExt + '.docx')
-doc.save(nazwaWordNoExt + '.pdf')
+os.system(f'libreoffice --headless --convert-to pdf {nazwaWord}')

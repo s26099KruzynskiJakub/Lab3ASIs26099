@@ -107,7 +107,7 @@ else:
     print("Model spełnia wymagania jakościowe. Optymalizacja nie jest konieczna.")
     doc.add_paragraph("Model spełnia wymagania jakościowe. Optymalizacja nie była konieczna.")
 
-doc.save(nameWord)
+doc.save(nazwaWord)
 
 doc_pdf = aw.Document(nazwaWord)
 doc_pdf.save(nazwaPDF)

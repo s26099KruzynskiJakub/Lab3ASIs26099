@@ -44,4 +44,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: docx-files
-          path: /home/runner/work/Lab3ASIs26099/Lab3ASIs26099/*.docx
+          path: /home/runner/work/Lab3ASIs26099/Lab3ASIs26099/*.pdf

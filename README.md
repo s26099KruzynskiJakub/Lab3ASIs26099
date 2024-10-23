@@ -1,6 +1,8 @@
 # Lab3ASIs26099
 Implementacja zadania nr 3 z ASI
-Generalnie projekt składa sie z 2 głównych plików
+Generalnie projekt składa sie z 2 głównych plików zawartych w pliku asi3Project 
+który był stworzony na potrzeby modyfikacji lokalnej kodu w pycharm i mozliwosci 
+szybkiego pushowania zmian z poziomu pycharm
 
 czyszczenie_porównywanieModeli.py -
 Plik wykonujacy wszelkie operacje przygotowywujace dane, wypełniający braki, pobiera dane i 

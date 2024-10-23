@@ -175,7 +175,8 @@ doc.add_paragraph(f'W niniejszej pracy wykonano pełną analizę danych, w tym i
 
 # Zapis dokumentu w formacie Word (.docx)
 doc.save(nazwaWord + ".docx")
-
+saveOptions = aw.saving.PdfSaveOptions()
+saveOptions.compliance = aw.saving.PdfCompliance.PDF17 
 # Zapis dokumentu w formacie PDF (.pdf)
-doc.save(nazwaWord + ".pdf")
+doc.save(nazwaWord, saveOptions)
 

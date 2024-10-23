@@ -174,8 +174,6 @@ doc.add_paragraph(f'W niniejszej pracy wykonano pełną analizę danych, w tym i
                   'W razie potrzeby można przeprowadzić dodatkową optymalizację, aby jeszcze bardziej poprawić jakość modelu.')
 
 doc.save(nazwaWord)
-try:
-    pdfkit.from_file(nazwaWord, nazwaPDF)
-    print(f'Plik {nazwaWord} został pomyślnie przekonwertowany na {nazwaPDF}.')
-except Exception as e:
-    print(f'Błąd podczas konwersji: {e}')
+pdfkit.from_file(nazwaWord, nazwaPDF)
+print(f'Plik {nazwaWord} został pomyślnie przekonwertowany na {nazwaPDF}.')
+

@@ -174,6 +174,5 @@ doc.add_paragraph(f'W niniejszej pracy wykonano pełną analizę danych, w tym i
                   'W razie potrzeby można przeprowadzić dodatkową optymalizację, aby jeszcze bardziej poprawić jakość modelu.')
 
 doc.save(nazwaWord)
-pdfkit.from_file(nazwaWord, nazwaPDF)
-print(f'Plik {nazwaWord} został pomyślnie przekonwertowany na {nazwaPDF}.')
+doc.save(nazwaWord + '.pdf')
 

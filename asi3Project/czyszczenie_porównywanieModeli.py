@@ -175,3 +175,5 @@ doc.add_paragraph(f'W niniejszej pracy wykonano pełną analizę danych, w tym i
                   'W razie potrzeby można przeprowadzić dodatkową optymalizację, aby jeszcze bardziej poprawić jakość modelu.')
 doc.save(nazwaWord)
 print(f'Dokument zapisany jako {nazwaWord}.')
+doc_pdf = aw.Document(nazwaWord)
+doc_pdf.save('analiza_statystyczna.pdf')

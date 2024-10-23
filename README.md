@@ -10,7 +10,7 @@ trening_i_raport.py - generalnie ten plik importuje i wtedy gdy model jest niedo
  tunowanie hiperparametrów, walidacja krzyżowa. Po tym wszystkim pokazuje po prostu jakie poprawy zaszły po optymalizacji kodu.
 
 Dokumentacja jest wynikiem automatycznie tworzonej dokumentacji która pisana jest w trakcie kompilowania kodu python.
-Starałem sie zrobic dynamiczna analize i piki te mozna znalezc w wykonanym workflow.
+Starałem sie zrobic dynamiczna analize i pliki te mozna znalezc w wykonanym workflow.
 Są rodzielone na 2 poniewaz te dokumentacje dotycza dwoch róznych rzeczy plik z nazwa analiza jest głównym plikiem z
 dokumentacja na stepny dotyczy jednie jakie zostały wykonane kroki optymalizacyjne ( generalnie kroki ktore zostały wykonane w trening )
  

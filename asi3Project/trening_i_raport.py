@@ -108,10 +108,10 @@ else:
     doc.add_paragraph("Model spełnia wymagania jakościowe. Optymalizacja nie była konieczna.")
 
 doc.save(nazwaWord)
-
-doc_pdf = aw.Document(nazwaWord)
-doc_pdf.save(nazwaPDF)
-print('zapsano pdf')
-print("Files in the current directory:", os.listdir('.'))
-current_directory = os.getcwd()
-print(f"Aktualna ścieżka robocza: {current_directory}")
+doc.save(nazwaPDF)
+# doc_pdf = aw.Document(nazwaWord)
+# doc_pdf.save(nazwaPDF)
+# print('zapsano pdf')
+# print("Files in the current directory:", os.listdir('.'))
+# current_directory = os.getcwd()
+# print(f"Aktualna ścieżka robocza: {current_directory}")

@@ -7,9 +7,21 @@ from sklearn.model_selection import train_test_split, GridSearchCV, cross_val_sc
 from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
 from sklearn.linear_model import Ridge
 from docx import Document
+import aspose.words as aw
 
 # Wczytanie oczyszczonych danych
 data = pd.read_csv('cleaned_data.csv')
+
+nazwaWord='analiza_statystyczna.docx'
+nazwaPDF='analiza_statystyczna.pdf'
+
+
+# Oczyszczanie starych plikow z zeszłych uruchomien jesli takie były
+if os.path.exists(nazwaWord):
+    os.remove(nazwaWord)
+# Oczyszczanie starych plikow z zeszłych uruchomien jesli takie były
+if os.path.exists(nazwaPDF):
+    os.remove(nazwaPDF)
 
 # Wybór zmiennych do modelowania
 X = data.drop(columns=['score'])
@@ -95,8 +107,11 @@ else:
     print("Model spełnia wymagania jakościowe. Optymalizacja nie jest konieczna.")
     doc.add_paragraph("Model spełnia wymagania jakościowe. Optymalizacja nie była konieczna.")
 
-# Zapisanie dokumentu
-doc.save('optymalizacja_modelu.docx')
+doc.save(nameWord)
+
+doc_pdf = aw.Document(nazwaWord)
+doc_pdf.save(nazwaPDF)
+print('zapsano pdf')
 print("Files in the current directory:", os.listdir('.'))
 current_directory = os.getcwd()
 print(f"Aktualna ścieżka robocza: {current_directory}")

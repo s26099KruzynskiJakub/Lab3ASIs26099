@@ -14,7 +14,8 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.svm import SVR
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.preprocessing import LabelEncoder
-from docx2pdf import convert  # Import docx2pdf
+from docx2pdf import convert
+import pypandoc
 
 # Wczytanie danych
 url = 'https://vincentarelbundock.github.io/Rdatasets/csv/AER/CollegeDistance.csv'

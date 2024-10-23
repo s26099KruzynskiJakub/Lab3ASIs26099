@@ -170,6 +170,6 @@ doc.add_paragraph(f'W niniejszej pracy wykonano pełną analizę danych, w tym i
 doc.save(nazwaWord)
 print(f'Dokument zapisany jako {nazwaWord}.')
 
-# Konwersja dokumentu do PDF
-convert(nazwaWord, nazwaPDF)  # Użycie docx2pdf do konwersji
+# Konwersja dokumentu do PDF za pomocą pypandoc
+pypandoc.convert_file(nazwaWord, 'pdf', outputfile=nazwaPDF)
 print('Zapisano PDF jako', nazwaPDF)

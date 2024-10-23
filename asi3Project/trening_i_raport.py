@@ -7,7 +7,7 @@ from sklearn.model_selection import train_test_split, GridSearchCV, cross_val_sc
 from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
 from sklearn.linear_model import Ridge
 from docx import Document
-import aspose.words as aw
+import pypandoc
 
 # Wczytanie oczyszczonych danych
 data = pd.read_csv('cleaned_data.csv')
@@ -108,9 +108,9 @@ else:
     doc.add_paragraph("Model spełnia wymagania jakościowe. Optymalizacja nie była konieczna.")
 
 doc.save(nazwaWord)
-doc_pdf = aw.Document(nazwaWord)
-doc_pdf.save(nazwaPDF)
-print('zapsano pdf')
+# Konwersja do PDF
+pypandoc.convert_file(nazwaWord, 'pdf', outputfile=nazwaPDF)
+print('Zapisano PDF')
 print("Files in the current directory:", os.listdir('.'))
 current_directory = os.getcwd()
 print(f"Aktualna ścieżka robocza: {current_directory}")

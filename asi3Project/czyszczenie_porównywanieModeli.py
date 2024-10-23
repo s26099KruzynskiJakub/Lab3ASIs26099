@@ -173,6 +173,9 @@ doc.add_paragraph(f'W niniejszej pracy wykonano pełną analizę danych, w tym i
                   'Dokument ten zawiera zarówno szczegóły dotyczące poszczególnych zmiennych, jak i oceny porównywanych modeli. '
                   'W razie potrzeby można przeprowadzić dodatkową optymalizację, aby jeszcze bardziej poprawić jakość modelu.')
 
-doc.save(nazwaWord)
-doc.save(nazwaWord + '.pdf')
+# Zapis dokumentu w formacie Word (.docx)
+doc.save(nazwaWord + ".docx")
+
+# Zapis dokumentu w formacie PDF (.pdf)
+doc.save(nazwaWord + ".pdf")
 

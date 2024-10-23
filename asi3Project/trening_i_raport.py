@@ -12,8 +12,8 @@ import aspose.words as aw
 # Wczytanie oczyszczonych danych
 data = pd.read_csv('cleaned_data.csv')
 
-nazwaWord='analiza_statystyczna.docx'
-nazwaPDF='analiza_statystyczna.pdf'
+nazwaWord='dokumentacjaOptymalizowanegoModelu.docx'
+nazwaPDF='dokumentacjaOptymalizowanegoModelu.pdf'
 
 
 # Oczyszczanie starych plikow z zeszłych uruchomien jesli takie były

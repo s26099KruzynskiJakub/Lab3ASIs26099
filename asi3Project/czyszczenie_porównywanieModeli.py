@@ -1,5 +1,4 @@
 import os
-
 import joblib as joblib
 import pandas as pd
 import numpy as np
@@ -15,19 +14,17 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.svm import SVR
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.preprocessing import LabelEncoder
-import aspose.words as aw
+from docx2pdf import convert  # Import docx2pdf
 
 # Wczytanie danych
 url = 'https://vincentarelbundock.github.io/Rdatasets/csv/AER/CollegeDistance.csv'
 data = pd.read_csv(url)
-nazwaWord='analiza_statystyczna.docx'
-nazwaPDF='analiza_statystyczna.pdf'
+nazwaWord = 'analiza_statystyczna.docx'
+nazwaPDF = 'analiza_statystyczna.pdf'
 
-
-# Oczyszczanie starych plikow z zeszłych uruchomien jesli takie były
+# Oczyszczanie starych plików
 if os.path.exists(nazwaWord):
     os.remove(nazwaWord)
-# Oczyszczanie starych plikow z zeszłych uruchomien jesli takie były
 if os.path.exists(nazwaPDF):
     os.remove(nazwaPDF)
 
@@ -39,10 +36,10 @@ doc.add_heading('Analiza statystyczna zmiennych', 0)
 doc.add_heading('Wstęp', level=1)
 doc.add_paragraph('Niniejszy dokument przedstawia wyniki analizy statystycznej danych, które pochodzą z zestawu CollegeDistance. '
                   'Dane te zostały wstępnie przetworzone, a następnie posłużyły do budowy modelu predykcyjnego, którego celem jest przewidywanie zmiennej "score". '
-                  'W trakcie pracy nad projektem przeprowadzono oczyszczanie danych, analizę statystyczną, wybór modeli, ich ocenę oraz optymalizację.'
-                  'Od raz chcę ostrzec że po wczesniejszych badaniach najlepszy wyniki osiągneła regresja liniowa i pod to głównie został przygotowany plik optymalizujacy model')
+                  'W trakcie pracy nad projektem przeprowadzono oczyszczanie danych, analizę statystyczną, wybór modeli, ich ocenę oraz optymalizację. '
+                  'Od raz chcę ostrzec że po wcześniejszych badaniach najlepszy wyniki osiągneła regresja liniowa i pod to głównie został przygotowany plik optymalizujący model.')
 
-doc.add_heading('Informacje o zmiennyh', level=1)
+doc.add_heading('Informacje o zmiennych', level=1)
 
 # Funkcja tworząca wykresy i statystyki dla każdej zmiennej
 def analyze_column(column_name):
@@ -72,11 +69,9 @@ def analyze_column(column_name):
     # Usunięcie pliku tymczasowego
     os.remove(tmp_filename)
 
-
-# Sprawdzenie dostępnych kolumn i wykonanie analizy dla każdej zmiennej
+# Analiza zmiennych
 for col in data.columns:
     analyze_column(col)
-
 
 # Zapisanie dokumentu przed oczyszczaniem danych
 doc.save(nazwaWord)
@@ -84,23 +79,17 @@ doc.save(nazwaWord)
 # Usunięcie kolumny 'rownames'
 data.drop('rownames', axis=1, inplace=True)
 
-# Zakodowanie kolumny 'income' na wartości liczbowe
+# Zakodowanie kolumn na wartości liczbowe
 label_encoder = LabelEncoder()
 data['income'] = label_encoder.fit_transform(data['income'])
-
-# Zakodowanie kolumny 'ethnicity' na wartości liczbowe
-label_encoder = LabelEncoder()
 data['ethnicity'] = label_encoder.fit_transform(data['ethnicity'])
-
-# Zamiana wartości 'male' i 'female' na 1 i 0 w kolumnie 'gender'
 data['gender'] = data['gender'].map({'male': 1, 'female': 0})
 
-# Zamiana wartości 'yes' i 'no' na 1 i 0 w odpowiednich kolumnach
+# Zamiana wartości 'yes' i 'no' na 1 i 0
 columns_to_convert = ['fcollege', 'mcollege', 'home', 'urban']
 for col in columns_to_convert:
     data[col] = data[col].map({'yes': 1, 'no': 0})
 
-# Zamiana wartości 'region' na 1 dla 'other' i 0 dla 'high', 'low'
 data['region'] = data['region'].map({'other': 1, 'west': 0})
 
 # Sprawdzenie struktury danych
@@ -111,20 +100,19 @@ print(data.info())
 print("\nBrakujące wartości w danych:")
 print(data.isnull().sum())
 
-# Obsługa brakujących wartości - usunięcie wierszy z więcej niż 3 brakującymi wartościami
+# Obsługa brakujących wartości
 initial_shape = data.shape
-data.dropna(thresh=len(data.columns) - 3, inplace=True)  # Usunięcie wierszy z więcej niż 3 brakującymi wartościami
+data.dropna(thresh=len(data.columns) - 3, inplace=True)
 print(f"\nKształt danych przed usunięciem wierszy: {initial_shape}")
 print(f"Kształt danych po usunięciu wierszy: {data.shape}")
 
-# Uzupełnienie brakujących wartości medianą dla kolumn numerycznych
+# Uzupełnienie brakujących wartości medianą
 numerical_cols = data.select_dtypes(include=['float64', 'int64']).columns.tolist()
 for col in numerical_cols:
     median_value = data[col].median()
     data[col] = data[col].fillna(median_value)
     print(f"Uzupełniono brakujące wartości w kolumnie '{col}' medianą: {median_value}")
 
-# Sprawdzenie, czy są nadal brakujące wartości
 print("\nBrakujące wartości w danych po imputacji:")
 print(data.isnull().sum())
 
@@ -177,8 +165,11 @@ doc.add_paragraph(f'W niniejszej pracy wykonano pełną analizę danych, w tym i
                   f'Zastosowano kilka modeli predykcyjnych, spośród których najlepszy okazał się model "{best_model_name}" z najniższym błędem średniokwadratowym (MSE): {best_mse:.4f}. '
                   'Dokument ten zawiera zarówno szczegóły dotyczące poszczególnych zmiennych, jak i oceny porównywanych modeli. '
                   'W razie potrzeby można przeprowadzić dodatkową optymalizację, aby jeszcze bardziej poprawić jakość modelu.')
+
+# Zapisanie dokumentu Word
 doc.save(nazwaWord)
 print(f'Dokument zapisany jako {nazwaWord}.')
-doc_pdf = aw.Document(nazwaWord)
-doc_pdf.save('analiza_statystyczna.pdf')
-print('zapsano pdf')
+
+# Konwersja dokumentu do PDF
+convert(nazwaWord, nazwaPDF)  # Użycie docx2pdf do konwersji
+print('Zapisano PDF jako', nazwaPDF)

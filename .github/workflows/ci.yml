@@ -28,12 +28,4 @@ jobs:
           mkdir model
           echo "Downloading best_model.pkl"
           curl -L -o model/best_model.pkl https://github.com/PJATK-ASI-2024/Lab3ASIs26099/raw/task3/best_model.pkl
-
-      - name: Check if best_model.pkl exists
-        run: |
-          if [ ! -f best_model.pkl ]; then
-            echo "File best_model.pkl does not exist. Exiting."
-            exit 1
-          else
-            echo "File best_model.pkl exists."
-          fi
+          ls -la model

@@ -15,4 +15,6 @@ Dokumentacja jest wynikiem automatycznie tworzonej dokumentacji która pisana je
 Starałem sie zrobic dynamiczna analize i pliki te mozna znalezc w wykonanym workflow.
 Są rodzielone na 2 poniewaz te dokumentacje dotycza dwoch róznych rzeczy plik z nazwa analiza jest głównym plikiem z
 dokumentacja na stepny dotyczy jednie jakie zostały wykonane kroki optymalizacyjne ( generalnie kroki ktore zostały wykonane w trening )
+
+testing
  

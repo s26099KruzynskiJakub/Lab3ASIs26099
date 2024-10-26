@@ -1,51 +1,30 @@
-name: Run Python Scripts and Save Artifacts
+name: Docker Deployment
 
 on:
   push:
     branches:
       - main
-  workflow_dispatch:  
 
 jobs:
-  run_scripts:
-    runs-on: ubuntu-latest  
+  build:
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
+      - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.x'
+          python-version: '3.9'
 
-      - name: Install Dependencies
+      - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
-          pip install joblib pandas numpy matplotlib seaborn scikit-learn pypandoc python-docx
-          sudo apt-get update
-          sudo apt-get install -y pandoc texlive-xetex
+          pip install -r requirements.txt
 
-      - name: Run czyszczenie_porównywanieModeli.py
+      - name: Load best_model.pkl
         run: |
-          python asi3Project/czyszczenie_porównywanieModeli.py
-
-      - name: Run trening_i_raport.py
-        run: |
-          python asi3Project/trening_i_raport.py
-
-      - name: List files in asi3Project
-        run: |
-          ls -la asi3Project  # This will help verify if .pdf files are present
-
-      - name: Upload .pdf artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: pdf-files
-          path: /home/runner/work/Lab3ASIs26099/Lab3ASIs26099/*.pdf
-
-      - name: Upload best_model.pkl artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: best-model
-          path: /home/runner/work/Lab3ASIs26099/Lab3ASIs26099/best_model.pkl
+          # Zakładając, że artefakt jest z workflow z task3
+          mkdir model
+          echo "Downloading best_model.pkl"
+          curl -L -o model/best_model.pkl https://github.com/PJATK-ASI-2024/Lab3ASIs26099/raw/task3/best_model.pkl

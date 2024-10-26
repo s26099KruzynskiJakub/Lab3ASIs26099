@@ -1,4 +1,4 @@
-name: Run Python Scripts and Save Artifacts
+name: Run Python Scripts and Save Artifacts and model
 
 on:
   push:

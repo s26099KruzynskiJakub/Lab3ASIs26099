@@ -3,7 +3,7 @@ name: Run Python Scripts and Save Artifacts and model
 on:
   push:
     branches:
-      - main
+      - task3
 
 jobs:
   run_scripts:

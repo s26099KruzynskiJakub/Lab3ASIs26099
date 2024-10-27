@@ -1,16 +1,31 @@
-# This is a sample Python script.
+from flask import Flask, request, jsonify
+import pickle
+import numpy as np
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+# Inicjalizacja aplikacji Flask
+app = Flask(__name__)
 
+# Wczytanie modelu
+with open('best_model.pkl', 'rb') as file:
+    model = pickle.load(file)
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+# Endpoint do przewidywania
+@app.route('/predict', methods=['POST'])
+def predict():
+    if request.content_type == 'application/json':
+        # Obsługa JSON
+        data = request.get_json()
+        features = np.array(data['features']).reshape(1, -1)
+    elif request.content_type == 'text/csv':
+        # Obsługa CSV
+        file = request.files['file']
+        features = np.loadtxt(file, delimiter=",").reshape(1, -1)
+    else:
+        return jsonify({'error': 'Unsupported format. Use JSON or CSV.'}), 400
 
+    # Przewidywanie
+    prediction = model.predict(features)
+    return jsonify({'prediction': prediction[0]})
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)

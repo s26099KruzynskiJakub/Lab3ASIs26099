@@ -49,3 +49,9 @@ jobs:
         with:
           name: best-model
           path: /home/runner/work/Lab3ASIs26099/Lab3ASIs26099/best_model.pkl
+
+      - name: Upload cleanedData artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: best-model
+          path: /home/runner/work/Lab3ASIs26099/Lab3ASIs26099/cleaned_data.csv

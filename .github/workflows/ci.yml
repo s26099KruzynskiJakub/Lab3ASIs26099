@@ -1,4 +1,4 @@
-name: Python Workflow
+name: Start Flask Application
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  run-python:
+  start-flask:
     runs-on: ubuntu-latest
 
     steps:
@@ -17,20 +17,16 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: '3.9'
-          
+
+      - name: Change directory to lab4Projects26099
+        run: |
+          cd lab4Projects26099
+
       - name: Install dependencies
         run: |
-          pip install -r lab4Projects26099/requirements.txt
+          pip install -r requirements.txt
 
       - name: Run the Python script
         run: |
           cd lab4Projects26099
-          python main.py
-
-      - name: Wait for the server to start
-        run: |
-          sleep 5
-          
-      - name: Send request to prediction endpoint
-        run: |
-          curl -X POST -F "file=@cleaned_data.csv" http://localhost:5000/predict
+          nohup python main.py & # Uruchomienie aplikacji w tle

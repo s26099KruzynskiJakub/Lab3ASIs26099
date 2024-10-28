@@ -22,7 +22,7 @@ Przejdź do katalogu projektu:
 bash
 
    ```bash
-lab4Projects26099
+cd lab4Projects26099
    ```
 Jak uruchomić aplikację lokalnie
 Aby uruchomić aplikację lokalnie, wykonaj poniższe kroki:

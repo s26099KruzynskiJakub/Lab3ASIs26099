@@ -20,7 +20,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install -r requirements.txt
+          pip install -r lab4Projects26099/requirements.txt
 
       - name: Run the Python script
         run: |

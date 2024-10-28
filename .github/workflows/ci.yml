@@ -18,13 +18,9 @@ jobs:
         with:
           python-version: '3.9'
 
-      - name: Change directory to lab4Projects26099
-        run: |
-          cd lab4Projects26099
-
       - name: Install dependencies
         run: |
-          pip install -r requirements.txt
+          pip install -r lab4Projects26099/requirements.txt
 
       - name: Run the Python script
         run: |

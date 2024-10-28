@@ -40,5 +40,6 @@ jobs:
           
       - name: Read response from file
         run: |
+          cd lab4Projects26099
           echo "Response from server read from file:"
           cat response.txt  # Wyświetlenie odpowiedzi z pliku

@@ -18,14 +18,18 @@ jobs:
         with:
           python-version: '3.9'
 
+      - name: Change directory to lab4Projects26099
+        run: |
+          cd lab4Projects26099
+
       - name: Install dependencies
         run: |
-          pip install -r lab4Projects26099/requirements.txt
+          pip install -r requirements.txt
 
       - name: Run the Python script
         run: |
-          python lab4Projects26099/main.py
+          python main.py
 
       - name: Send request to prediction endpoint
         run: |
-          curl -X POST -F "file=@lab4Projects26099/cleaned_data.csv" http://localhost:5000/predict
+          curl -X POST -F "file=@cleaned_data.csv" http://localhost:5000/predict

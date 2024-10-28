@@ -40,8 +40,13 @@ jobs:
             fi
           done
           
-      - name: Send request to prediction endpoint
+      - name: Send request to prediction endpoint and save response
         run: |
           response=$(curl -X POST -F "file=@lab4Projects26099/cleaned_data.csv" http://localhost:5000/predict -s)
-          echo "Response from server:"
-          echo "$response"  # Wyświetlenie odpowiedzi
+          echo "Response from server:" > response.txt
+          echo "$response" >> response.txt  # Zapisz odpowiedź do pliku
+          
+      - name: Read response from file
+        run: |
+          echo "Response from server read from file:"
+          cat response.txt  # Wyświetlenie odpowiedzi z pliku

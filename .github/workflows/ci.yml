@@ -33,6 +33,9 @@ jobs:
           export FLASK_APP=main.py
           tmux new-session -d -s flask_session "flask run --host=0.0.0.0 --port=5000" # Uruchomienie aplikacji Flask w nowej sesji tmux
           sleep 5  # Czekaj chwilę, aby serwer miał czas na uruchomienie
+          response=$(curl -X POST -F "file=@lab4Projects26099/cleaned_data.csv" http://localhost:5000/predict)
+          echo "Response from server:" > response.txt
+          echo "$response" >> response.txt  # Zapisz odpowiedź do pliku
 
       - name: Send request to prediction endpoint
         run: |

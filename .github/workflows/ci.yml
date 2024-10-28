@@ -22,11 +22,16 @@ jobs:
         run: |
           pip install -r lab4Projects26099/requirements.txt
 
-      - name: Run the Flask application
+      - name: Install tmux
+        run: |
+          sudo apt-get update
+          sudo apt-get install tmux -y
+
+      - name: Run the Flask application in tmux
         run: |
           cd lab4Projects26099
           export FLASK_APP=main.py
-          flask run --host=0.0.0.0 --port=5000 & # Uruchomienie aplikacji Flask w tle
+          tmux new-session -d -s flask_session "flask run --host=0.0.0.0 --port=5000" # Uruchomienie aplikacji Flask w nowej sesji tmux
           sleep 5  # Czekaj chwilę, aby serwer miał czas na uruchomienie
 
       - name: Send request to prediction endpoint

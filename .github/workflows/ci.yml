@@ -1,4 +1,4 @@
-name: Docker Deployment
+name: Python Workflow
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build:
+  run-python:
     runs-on: ubuntu-latest
 
     steps:
@@ -22,10 +22,10 @@ jobs:
         run: |
           pip install -r requirements.txt
 
-      - name: Load best_model.pkl
+      - name: Run the Python script
         run: |
-          # Zakładając, że artefakt jest z workflow z task3
-          mkdir model
-          echo "Downloading best_model.pkl"
-          curl -L -o model/best_model.pkl https://github.com/PJATK-ASI-2024/Lab3ASIs26099/raw/task3/best_model.pkl
-          ls -la model
+          python lab4Projects26099/main.py
+
+      - name: Send request to prediction endpoint
+        run: |
+          curl -X POST -F "file=@lab4Projects26099/cleaned_data.csv" http://localhost:5000/predict

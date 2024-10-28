@@ -26,3 +26,7 @@ jobs:
         run: |
           cd lab4Projects26099
           nohup python main.py & # Uruchomienie aplikacji w tle
+
+      - name: Send request to prediction endpoint
+        run: |
+          curl -X POST -F "file=@lab4Projects26099/cleaned_data.csv" http://localhost:5000/predict

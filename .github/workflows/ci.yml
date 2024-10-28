@@ -37,24 +37,6 @@ jobs:
           echo "Response from server:" > response.txt
           echo "$response" >> response.txt  # Zapisz odpowiedź do pliku
 
-      - name: Send request to prediction endpoint
-        run: |
-          for i in {1..5}; do # Spróbuj 5 razy
-            response=$(curl -s -o /dev/null -w "%{http_code}" -X POST -F "file=@lab4Projects26099/cleaned_data.csv" http://localhost:5000/predict)
-            if [ "$response" -eq 200 ]; then
-              echo "Received response from server."
-              break
-            else
-              echo "Server not responding, retrying in 5 seconds..."
-              sleep 5
-            fi
-          done
-          
-      - name: Send request to prediction endpoint and save response
-        run: |
-          response=$(curl -X POST -F "file=@lab4Projects26099/cleaned_data.csv" http://localhost:5000/predict)
-          echo "Response from server:" > response.txt
-          echo "$response" >> response.txt  # Zapisz odpowiedź do pliku
           
       - name: Read response from file
         run: |

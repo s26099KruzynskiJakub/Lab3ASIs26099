@@ -14,9 +14,13 @@ Aplikacja analizuje wyniki na podstawie dostarczonych danych. Umożliwia użytko
 Aby sklonować to repozytorium, wykonaj następujące kroki:
 
 1. Otwórz terminal.
-2. Użyj polecenia `git clone`, aby sklonować repozytorium:
+2. 2. Użyj polecenia `git clone`, aby sklonować repozytorium:
    ```bash
    git clone https://github.com/s26099KruzynskiJakub/Lab4ASIs26099.git
+   ```
+3. Użyj polecenia `cd Lab4ASIs26099`, aby wejsc w pliki repozytorium:
+   ```bash
+   cd Lab4ASIs26099
    ```
 Przejdź do katalogu projektu:
 bash

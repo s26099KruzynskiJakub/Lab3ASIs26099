@@ -63,5 +63,6 @@ jobs:
 
       - name: Build and push Docker image
         run: |
+          cd lab4Projects26099
           docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/lab4-analyzer:latest .
           docker push ${{ secrets.DOCKER_HUB_USERNAME }}/lab4-analyzer:latest

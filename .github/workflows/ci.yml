@@ -61,27 +61,8 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
 
-      - name: Build  Docker image
+      - name: Build and push Docker image
         run: |
           cd lab4Projects26099
           docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/lab4-analyzer:latest .
           docker push ${{ secrets.DOCKER_HUB_USERNAME }}/lab4-analyzer:latest
-
-      - name: Run Flask application in Docker
-        run: |
-          docker run -d -p 5000:5000 --name flask_container ${{ secrets.DOCKER_HUB_USERNAME }}/lab4-analyzer:latest
-          
-      - name: Send CSV file to Flask app in Docker
-        run: |
-          response=$(curl -X POST -F "file=@lab4Projects26099/cleaned_data.csv" http://localhost:5000/predict)
-          echo "Response from server:" > response.txt
-          echo "$response" >> response.txt
-
-      - name: push Docker image
-        run: |
-          cd lab4Projects26099
-          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/lab4-analyzer:latest
-          
-      - name: Run Flask application in Docker
-        run: |
-          docker run -d -p 5000:5000 --name flask_container ${{ secrets.DOCKER_HUB_USERNAME }}/lab4-analyzer:latest
